@@ -31,7 +31,6 @@
 
 	    FHIR.oauth2.ready(function (fhirClient) {
 	        var patient = fhirClient.patient;
-	        alert("auth")
 	        $.when(patient.api.fetchAll({
 	            type: "MedicationStatement",
 	            status: "active"            
@@ -44,7 +43,11 @@
 	}
 
 	function paintMain(){
-		alert("hi")
+		var toInsert = ""
+		_.each(myApp.meds, function(val,index){
+			toInsert += "<p>"+val.medicationCodeableConcept.text+"</p>"
+		})
+		$("#main").html(toInsert)
 	}
 
 	</script>
