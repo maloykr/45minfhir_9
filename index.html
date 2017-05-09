@@ -31,7 +31,7 @@
 
 	    FHIR.oauth2.ready(function (fhirClient) {
 	        var patient = fhirClient.patient;
-
+	        alert("auth")
 	        $.when(patient.api.fetchAll({
 	            type: "MedicationStatement",
 	            status: "active"            
