@@ -1,3 +1,49 @@
+<!DOCTYPE html>
 <html>
-hi.
+  <head>
+
+    <title>45minFHIR</title>
+	    <script src="jquery.js"></script>
+	    <script src="underscore.js"></script>
+	    <script src='fhir-client.js'></script>
+
+    <style>
+
+    </style>
+
+  </head>
+	<body>
+	
+	<div id="main"></div>
+
+
+
+	<script>
+
+	var myApp = {}
+
+	var dfdGotMeds = $.Deferred();
+
+	$(document).ready(function(){ getFHIR(); })
+	$.when(dfdGotMeds).then(function(){ paintMain(); })
+
+	function getFHIR(){
+
+	    FHIR.oauth2.ready(function (fhirClient) {
+	        var patient = fhirClient.patient;
+
+	        $.when(patient.api.fetchAll({
+	            type: "MedicationStatement",
+	            status: "active"            
+	        }).done(function (data) {
+	                  myApp.meds = data
+	                  dfdGotMeds.resolve()
+	        }), function(error){ alert(JSON.stringify(error)) });
+
+	   	})
+	}
+
+	</script>
+
+	</body>
 </html>
