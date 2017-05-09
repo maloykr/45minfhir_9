@@ -23,7 +23,7 @@
 	var myApp = {}
 
 	var dfdGotMeds = $.Deferred();
-	alert("hi")
+
 	$(document).ready(function(){ getFHIR(); })
 	$.when(dfdGotMeds).then(function(){ paintMain(); })
 
